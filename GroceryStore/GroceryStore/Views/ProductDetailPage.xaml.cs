@@ -30,13 +30,13 @@ namespace GroceryStore.Views
             {
                 _product = product;
                 Title = product.name;
+                image.Source = product.image;
                 name.Text = product.name;
-                brand_name.Text = product.product_brand.brand_name;
+                brand_name.Text = product.brand_name;
                 b_price.Text = "Rs " + product.price;
                 description.Text = product.description;
                 weight.ItemsSource = product.get_product_variations.ToList();
                 weight.SelectedIndex = 0;
-                image.Source = product.image;
                 favouriteIcon.Source = product.favourite;
                 _pageTitle = product.name;
                 if (product.special_price == null)

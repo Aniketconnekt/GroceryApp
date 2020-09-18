@@ -124,6 +124,7 @@ namespace GroceryStore.Models
 
     public class Product : INotifyPropertyChanged
     {
+        public string brand_name { get; set; }
         public int id { get; set; }
         public int category_id { get; set; }
         public int brand_id { get; set; }

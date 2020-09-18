@@ -23,25 +23,79 @@ namespace GroceryStore.Views
     public partial class Home : ContentPage
     {
         public HomeVM ViewModel;
-        int SlidePosition = 0;
-
+        private int SlidePosition = 0;
+        public List<Models.Slider> sliderlist { get; set; }
+        public List<Product> featurelist { get; set; }
+        public List<Product> quickProductslist { get; set; }
+        public List<Product> offeredProductslist { get; set; }
+        public List<Category> datalist { get; set; }
         public Home()
         {
             //MessagingCenter.Send((App)Application.Current, "getCartCountHomeOnly");
             InitializeComponent();
 
-            var datalist = new List<Category>();
-            var a = new Category { Image = "icon.png" ,Id=1};
-            var b = new Category { Image = "mobile.png", Id=2 };
-            var c = new Category { Image = "icon.png" ,Id=3 };
-            var d = new Category { Image = "icon.png" ,Id=4};
-            var e = new Category { Image = "mobile.png" ,Id=5 };
-            var f = new Category { Image = "icon.png", Id=6 };
-            datalist.Add(a); datalist.Add(b); datalist.Add(c); datalist.Add(d); datalist.Add(e); datalist.Add(f);
+            //var datalist = new List<Category>();
+            //var a = new Category { Image = "icon.png", Id = 1 };
+            //var b = new Category { Image = "banner.png",Id =2 };
+            //var c = new Category { Image = "user.png", Id = 3 };
+            //var d = new Category { Image = "user.png", Id = 4 };
+            //var e = new Category { Image = "icon.png", Id = 5 };
+            //var f = new Category { Image = "banner.png", Id = 6 };
+            //datalist.Add(a); datalist.Add(b); datalist.Add(c); datalist.Add(d); datalist.Add(e); datalist.Add(f);
+            //itemCategoryList.FlowItemsSource = datalist;
+            datalist = new List<Category>
+            {
+                new Category{Image = "icon.png", Id = 1},
+                new Category{Image = "banner.png",Id =2},
+                new Category{Image = "user.png", Id = 3},
+                new Category{Image = "user.png", Id = 4},
+                new Category{Image = "icon.png", Id = 5},
+                new Category{Image = "banner.png", Id = 6},
+            };
             itemCategoryList.FlowItemsSource = datalist;
 
+            sliderlist = new List<Models.Slider>
+            {
+                new Models.Slider{image="banner.png"},
+                new Models.Slider{image="cart_empty.png"},
+                new Models.Slider{image="icon.png"},
+                new Models.Slider{image="address_empty.png"},
+            };
+            myView.ItemsSource = sliderlist;
+            Device.StartTimer(TimeSpan.FromSeconds(3), () =>
+            {
+               SlidePosition++;
+               if (SlidePosition == sliderlist.Count) SlidePosition = 0;
+               myView.Position = SlidePosition;
+               return true;
+             });
 
+            featurelist = new List<Product>
+            {
+                new Product{id=1, discount="50", image="icon.png", special_price="200", price="400" , name="watch", unit="1" , brand_name="Titan", description="Its analog watch with latest technology and brand support"},
+                new Product{id=2, discount="75", image="icon.png", special_price="200", price="800" , name="belt", unit="5",},
+                new Product{id=3, discount="25", image="icon.png", special_price="3000", price="4000" , name="Sunglasses", unit="10"},
+                new Product{id=4, image="icon.png",  price="40" , name="watch", unit="2"},
+            };
+            featuredProducts.ItemsSource = featurelist;
 
+            quickProductslist = new List<Product>
+            {
+                new Product{id=1, discount="50", image="icon.png", special_price="200", price="400" , name="watch", unit="1"},
+                new Product{id=2, discount="75", image="icon.png", special_price="200", price="800" , name="belt", unit="5"},
+                new Product{id=3, discount="25", image="icon.png", special_price="3000", price="4000" , name="Sunglasses", unit="10"},
+                new Product{id=4, image="icon.png",  price="40" , name="watch", unit="2"},
+            };
+            quickProducts.ItemsSource = quickProductslist;
+
+            offeredProductslist = new List<Product>
+            {
+                new Product{id=1, discount="50", image="icon.png", special_price="200", price="400" , name="watch", unit="1"},
+                new Product{id=2, discount="75", image="icon.png", special_price="200", price="800" , name="belt", unit="5"},
+                new Product{id=3, discount="25", image="icon.png", special_price="3000", price="4000" , name="Sunglasses", unit="10"},
+                new Product{id=4, image="icon.png",  price="40" , name="watch", unit="2"},
+            };
+            offeredProducts.ItemsSource = offeredProductslist;
 
             ////featuredLabel.IsVisible = false;
             ////quickLabel.IsVisible = false;

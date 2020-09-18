@@ -14,17 +14,17 @@ namespace GroceryStore.Models
         public int id { get; set; }
         public string image { get; set; }
 
-        public static async Task<SliderResponse> GetSliders()
-        {
-            SliderResponse generalResponse;
-            using (HttpClient httpClient = new HttpClient(new NativeMessageHandler()))
-            {
-                var response = await httpClient.GetAsync(Config.GetSlider);
-                var json = await response.Content.ReadAsStringAsync();
-                generalResponse = JsonConvert.DeserializeObject<SliderResponse>(json);
-            }
-            return generalResponse;
-        }
+        //public static async Task<SliderResponse> GetSliders()
+        //{
+        //    SliderResponse generalResponse;
+        //    using (HttpClient httpClient = new HttpClient(new NativeMessageHandler()))
+        //    {
+        //        var response = await httpClient.GetAsync(Config.GetSlider);
+        //        var json = await response.Content.ReadAsStringAsync();
+        //        generalResponse = JsonConvert.DeserializeObject<SliderResponse>(json);
+        //    }
+        //    return generalResponse;
+        //}
     }
 
     public class SliderResponse
